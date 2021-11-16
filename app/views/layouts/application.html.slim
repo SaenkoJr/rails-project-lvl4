@@ -1,12 +1,8 @@
 doctype html
 html
   head
-    title
-      | RailsProjectLvl4
-    meta[name="viewport" content="width=device-width,initial-scale=1"]
-    = csrf_meta_tags
-    = csp_meta_tag
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-  body
-    = yield
+    = render 'layouts/shared/head'
+  body.d-flex.flex-column.h-100
+    main.mt-sm-2.mb-2.pb-2
+      .container
+        = yield
