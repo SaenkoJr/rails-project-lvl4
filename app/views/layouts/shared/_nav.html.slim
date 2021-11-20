@@ -1,0 +1,18 @@
+.container
+  header.d-flex.flex-wrap.justify-content-center.py-3.mb-4.border-bottom
+    = link_to root_path, class: 'd-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none' do
+      span.fs-4= t(:title)
+    ul.nav
+      - if signed_in?
+        li.dropdown
+          a#profile.nav-link.link-dark.px-2.dropdown-toggle type="button" data-bs-toggle="dropdown" aria-expanded="true" href="#"
+            i.bi-person-circle.me-1
+          ul.dropdown-menu.dropdown-menu-end aria-labelledby="profile"
+            li
+              h5.dropdown-header= current_user.email
+            .dropdown-divider
+            li= link_to t(:sign_out), session_path, method: :delete, class: 'dropdown-item'
+      - else
+        - auth_env = Rails.env.development? ? :developer : :github
+        li= link_to t(:github_auth), auth_request_path(auth_env), method: :post, class: 'nav-link link-dark'
+
