@@ -8,5 +8,6 @@ Rails.application.routes.draw do
     match 'auth/:provider/callback', to: 'auth#callback', via: %i[get post], as: :callback_auth
 
     resource :session, only: :destroy
+    resources :repositories
   end
 end

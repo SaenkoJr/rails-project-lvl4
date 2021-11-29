@@ -11,11 +11,11 @@ module AuthConcern
   end
 
   def signed_in?
-    !current_user.nil?
+    !current_user.guest?
   end
 
   def current_user
-    return nil if session[:user_id].blank?
+    return Guest.new if session[:user_id].blank?
 
     @current_user ||= User.find(session[:user_id])
   end

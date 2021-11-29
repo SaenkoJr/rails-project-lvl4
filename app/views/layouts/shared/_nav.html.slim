@@ -1,7 +1,14 @@
 .container
-  header.d-flex.flex-wrap.justify-content-center.py-3.mb-4.border-bottom
-    = link_to root_path, class: 'd-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none' do
-      span.fs-4= t(:title)
+  nav.d-flex.flex-wrap.align-items-center.py-1.mb-4.border-bottom
+    div.navbar.navbar-expand-md.navbar-light.me-auto
+      = link_to root_path, class: 'd-flex align-items-center mb-3 mb-md-0 me-2 text-dark text-decoration-none' do
+        span.fs-4= t(:title)
+      div.collapse.navbar-collapse#navbarToggler
+        ul.nav.nav-pills.flex-grow-1.navbar.me-auto
+          li.nav-item
+            = link_to t(:home), root_path, class: 'nav-link text-dark'
+          li.nav-item
+            = link_to t('.repositories'), repositories_path, class: 'nav-link text-dark'
     ul.nav
       - if signed_in?
         li.dropdown
@@ -15,4 +22,3 @@
       - else
         - auth_env = Rails.env.development? ? :developer : :github
         li= link_to t(:github_auth), auth_request_path(auth_env), method: :post, class: 'nav-link link-dark'
-

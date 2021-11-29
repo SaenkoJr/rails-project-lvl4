@@ -7,8 +7,9 @@ module SignIn
     OmniAuth.config.add_mock(
       :github,
       {
-        uid: 12_345,
-        info: { email: user[:email] }
+        uid: Faker::Internet.uuid,
+        info: { nickname: user[:nickname], email: user[:email] },
+        credentials: { token: user[:token] }
       }
     )
 

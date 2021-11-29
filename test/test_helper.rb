@@ -3,6 +3,7 @@
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'rails/test_help'
+require 'webmock/minitest'
 require 'helpers/sign_in'
 
 OmniAuth.config.test_mode = true
@@ -13,6 +14,8 @@ OmniAuth.config.add_mock(
 Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:github]
 
 class ActiveSupport::TestCase
+  include FactoryBot::Syntax::Methods
+
   # Run tests in parallel with specified workers
   parallelize(workers: :number_of_processors)
 
@@ -20,6 +23,9 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def load_fixture(filename)
+    File.read(File.dirname(__FILE__) + "/fixtures/#{filename}")
+  end
 end
 
 class ActionDispatch::IntegrationTest

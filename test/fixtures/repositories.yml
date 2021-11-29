@@ -1,0 +1,17 @@
+one:
+  name: $LABEL
+  user: one
+  link: $LABEL.com
+  language: $LABEL
+
+two:
+  name: $LABEL
+  user: one
+  link: $LABEL.com
+  language: $LABEL
+
+three:
+  name: $LABEL
+  user: two
+  link: $LABEL.com
+  language: $LABEL

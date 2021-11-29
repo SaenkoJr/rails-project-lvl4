@@ -6,6 +6,8 @@ DEFAULTS: &DEFAULTS
 
 one:
   <<: *DEFAULTS
+  token: <%= Faker::Omniauth.github[:credentials][:token] %>
 
 two:
   <<: *DEFAULTS
+  token: <%= Faker::Omniauth.github[:credentials][:token] %>

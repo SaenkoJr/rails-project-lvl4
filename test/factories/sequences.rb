@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
+  sequence :name, aliases: [:full_name] do
+    Faker::Lorem.sentence
+  end
+
   sequence :email do
     Faker::Internert.email
   end
