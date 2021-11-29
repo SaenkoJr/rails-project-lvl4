@@ -7,8 +7,9 @@
         ul.nav.nav-pills.flex-grow-1.navbar.me-auto
           li.nav-item
             = link_to t(:home), root_path, class: 'nav-link text-dark'
-          li.nav-item
-            = link_to t('.repositories'), repositories_path, class: 'nav-link text-dark'
+          - if signed_in?
+            li.nav-item
+              = link_to t('.repositories'), repositories_path, class: 'nav-link text-dark'
     ul.nav
       - if signed_in?
         li.dropdown
@@ -20,5 +21,5 @@
             .dropdown-divider
             li= link_to t(:sign_out), session_path, method: :delete, class: 'dropdown-item'
       - else
-        - auth_env = Rails.env.development? ? :developer : :github
+        - auth_env = Rails.env.development? ? :github : :github
         li= link_to t(:github_auth), auth_request_path(auth_env), method: :post, class: 'nav-link link-dark'
