@@ -16,7 +16,7 @@
             i.bi-person-circle.me-1
           ul.dropdown-menu.dropdown-menu-end aria-labelledby="profile"
             li
-              h5.dropdown-header= current_user.email
+              h5.dropdown-header= current_user.nickname
             .dropdown-divider
             li= link_to t(:sign_out), session_path, method: :delete, class: 'dropdown-item'
       - else

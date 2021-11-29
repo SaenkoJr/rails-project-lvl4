@@ -1,3 +1,23 @@
-- @repositories.each do |repo|
-  div
-    h4 = repo.name
+- content_for :heading do
+ = t('.heading')
+
+= link_to ('.new'), new_repository_path, class: 'btn btn-sm btn-outline-secondary'
+hr
+
+table.table.table-hover
+  thead
+    tr
+      th scope='col' = t('.id')
+      th scope='col' = t('.github_id')
+      th scope='col' = t('.name')
+      th scope='col' = t('.link')
+      th scope='col' = t('.language')
+  tbody
+    - @repositories.each do |repo|
+      tr
+        th scope='row' = link_to repo.id, repository_path(repo), class: 'link-info text-decoration-none'
+        td = repo.github_id
+        td = repo.name
+        td = link_to repo.link, repo.link, target: '_blank', class: 'link-info text-decoration-none'
+        td = repo.language
+

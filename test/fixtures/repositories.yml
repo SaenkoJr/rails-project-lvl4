@@ -1,17 +1,20 @@
 one:
   name: $LABEL
+  full_name: one/$LABEL
   user: one
-  link: $LABEL.com
+  link: www.$LABEL.com
   language: $LABEL
 
 two:
   name: $LABEL
+  full_name: one/$LABEL
   user: one
-  link: $LABEL.com
+  link: www.$LABEL.com
   language: $LABEL
 
 three:
   name: $LABEL
+  full_name: two/$LABEL
   user: two
-  link: $LABEL.com
+  link: www.$LABEL.com
   language: $LABEL
