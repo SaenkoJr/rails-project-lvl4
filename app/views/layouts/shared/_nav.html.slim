@@ -21,5 +21,4 @@
             .dropdown-divider
             li= link_to t(:sign_out), session_path, method: :delete, class: 'dropdown-item'
       - else
-        - auth_env = Rails.env.development? ? :github : :github
-        li= link_to t(:github_auth), auth_request_path(auth_env), method: :post, class: 'nav-link link-dark'
+        li= link_to t(:github_auth), auth_request_path(:github), method: :post, class: 'nav-link link-dark'
