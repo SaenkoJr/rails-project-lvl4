@@ -1,7 +1,7 @@
 - content_for :heading do
  = t('.heading')
 
-= link_to ('.new'), new_repository_path, class: 'btn btn-sm btn-outline-secondary'
+= link_to t(:new), new_repository_path, class: 'btn btn-sm btn-outline-secondary'
 hr
 
 table.table.table-hover
@@ -17,7 +17,7 @@ table.table.table-hover
       tr
         th scope='row' = link_to repo.id, repository_path(repo), class: 'link-info text-decoration-none'
         td = repo.github_id
-        td = repo.name
+        td = repo.full_name
         td = link_to repo.link, repo.link, target: '_blank', class: 'link-info text-decoration-none'
         td = repo.language
 

@@ -1,0 +1,12 @@
+en:
+  web:
+    repositories:
+      index:
+        heading: Repositories
+        id: ID
+        github_id: Github ID
+        name: Name
+        link: Link
+        language: Language
+      new:
+        heading: New repository

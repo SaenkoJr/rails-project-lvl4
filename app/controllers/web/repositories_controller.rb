@@ -25,17 +25,21 @@ module Web
     def create
       authorize Repository
 
-      client = Octokit::Client.new(access_token: current_user.token, per_page: 200)
+      if repository_params[:github_id].empty?
+        redirect_to new_repository_path, alert: t('.empty_github_id') and return
+      end
+
+      client = Octokit::Client.new(access_token: current_user.token)
       repo = client.repo(repository_params[:github_id].to_i)
 
       @repository = current_user.repositories.build(
-        github_id: repo.id,
-        name: repo.name,
-        full_name: repo.full_name,
-        link: repo.html_url,
-        language: repo.language,
-        repo_created_at: repo.created_at,
-        repo_updated_at: repo.updated_at
+        github_id: repository_params[:github_id],
+        name: repo[:name],
+        full_name: repo[:full_name],
+        link: repo[:html_url],
+        language: repo[:language].downcase,
+        repo_created_at: repo[:created_at],
+        repo_updated_at: repo[:updated_at]
       )
 
       if @repository.save

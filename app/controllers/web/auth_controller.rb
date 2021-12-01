@@ -7,11 +7,9 @@ module Web
     def callback
       user = User.find_or_initialize_by(email: auth.info.email)
 
-      unless user.persisted?
-        user.nickname = auth.info.nickname
-        user.token = auth.credentials.token
-        user.save!
-      end
+      user.nickname = auth.info.nickname
+      user.token = auth.credentials.token
+      user.save!
 
       sign_in user
       redirect_to root_path, notice: t('.success')

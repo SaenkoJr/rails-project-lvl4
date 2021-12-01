@@ -7,5 +7,5 @@ class Repository < ApplicationRecord
 
   enumerize :language, in: [:javascript]
 
-  validates :link, presence: true
+  validates :github_id, presence: true
 end

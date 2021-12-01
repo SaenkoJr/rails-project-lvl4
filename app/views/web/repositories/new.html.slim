@@ -1,0 +1,7 @@
+- content_for :heading do
+  = t('.heading')
+
+= simple_form_for @repository do |f|
+  = f.input :github_id, collection: @repos, prompt: :translate, input_html: { class: 'form-select' }
+  = f.button :submit, class: 'btn btn-secondary'
+
