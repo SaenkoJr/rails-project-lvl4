@@ -6,7 +6,7 @@ en:
         id: ID
         github_id: Github ID
         name: Name
-        link: Link
+        link: Github link
         language: Language
       new:
         heading: New repository
