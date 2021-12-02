@@ -8,4 +8,8 @@ class Guest
   def guest?
     true
   end
+
+  def token_expired?
+    false
+  end
 end

@@ -9,10 +9,15 @@ module Web
 
       user.nickname = auth.info.nickname
       user.token = auth.credentials.token
+      user.token_expires_at = auth.credentials.expires_at
       user.save!
 
       sign_in user
       redirect_to root_path, notice: t('.success')
+    end
+
+    def failure
+      redirect_to root_path, alert: t(:unauthorized)
     end
 
     private

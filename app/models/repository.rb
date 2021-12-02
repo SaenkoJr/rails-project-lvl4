@@ -5,7 +5,7 @@ class Repository < ApplicationRecord
 
   belongs_to :user
 
-  enumerize :language, in: [:javascript]
+  enumerize :language, in: AVAILABLE_LANGUAGES
 
   validates :github_id, presence: true
 end

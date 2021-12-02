@@ -4,6 +4,8 @@ one:
   user: one
   link: www.$LABEL.com
   language: $LABEL
+  repo_created_at: <%= DateTime.current %>
+  repo_updated_at: <%= DateTime.current %>
 
 two:
   name: $LABEL
@@ -11,6 +13,8 @@ two:
   user: one
   link: www.$LABEL.com
   language: $LABEL
+  repo_created_at: <%= DateTime.current %>
+  repo_updated_at: <%= DateTime.current %>
 
 three:
   name: $LABEL
@@ -18,3 +22,5 @@ three:
   user: two
   link: www.$LABEL.com
   language: $LABEL
+  repo_created_at: <%= DateTime.current %>
+  repo_updated_at: <%= DateTime.current %>

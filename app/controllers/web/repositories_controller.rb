@@ -2,6 +2,7 @@
 
 module Web
   class RepositoriesController < Web::ApplicationController
+    before_action :verify_token
     after_action :verify_authorized
 
     def index
@@ -13,8 +14,8 @@ module Web
       @repository = Repository.new
       authorize @repository
 
-      client = Octokit::Client.new(access_token: current_user.token, per_page: 200)
-      @repos = client.repos
+      client = Octokit::Client.new(access_token: current_user.token, per_page: 100)
+      @repos = client.repos.filter { |repo| AVAILABLE_LANGUAGES.include? repo.language.downcase }
     end
 
     def show
@@ -32,20 +33,19 @@ module Web
       client = Octokit::Client.new(access_token: current_user.token)
       repo = client.repo(repository_params[:github_id].to_i)
 
-      @repository = current_user.repositories.build(
-        github_id: repository_params[:github_id],
-        name: repo[:name],
-        full_name: repo[:full_name],
-        link: repo[:html_url],
-        language: repo[:language].downcase,
-        repo_created_at: repo[:created_at],
-        repo_updated_at: repo[:updated_at]
-      )
+      @repository = current_user.repositories.find_or_initialize_by(github_id: repository_params[:github_id])
+      @repository[:name] = repo[:name]
+      @repository[:full_name] = repo[:full_name]
+      @repository[:link] = repo[:html_url]
+      @repository[:language] = repo[:language].downcase
+      @repository[:repo_created_at] = repo[:created_at]
+      @repository[:repo_updated_at] = repo[:updated_at]
 
       if @repository.save
         redirect_to @repository, notice: t('.success')
       else
-        render :new, alert: t('.failure')
+        flash[:alert] = t('.failure')
+        render :new
       end
     end
 

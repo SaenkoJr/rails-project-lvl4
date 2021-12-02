@@ -19,4 +19,11 @@ module AuthConcern
 
     @current_user ||= User.find(session[:user_id])
   end
+
+  def verify_token
+    return unless current_user.token_expired?
+
+    sign_out
+    redirect_to root_path, alert: t(:session_expired)
+  end
 end
