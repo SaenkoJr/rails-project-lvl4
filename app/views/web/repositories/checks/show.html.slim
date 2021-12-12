@@ -22,6 +22,6 @@ table.table.table-hover
       th scope='col' = t('.file')
       th scope='col' = t('.rule')
       th scope='col' = t('.message')
-      th scope='col' = t('.column_line')
+      th scope='col' = t('.line_column')
   tbody
     = render partial: 'web/repositories/checks/issue', collection: @check.issues

@@ -3,9 +3,11 @@
 class CheckerJob < ApplicationJob
   queue_as :repository
 
-  def perform(repository_id)
-    repo = Repository.find(repository_id)
-    checker = ApplicationContainer[:checker].new(repo)
+  def perform(check_id)
+    check = Repository::Check.find(check_id)
+    checker = ApplicationContainer.resolve(:checker).new(check)
     checker.lint
+  rescue StandartError
+    checker.fail!
   end
 end
