@@ -34,12 +34,12 @@ module Web
       repo = client.repo(repository_params[:github_id].to_i)
 
       @repository = current_user.repositories.find_or_initialize_by(github_id: repository_params[:github_id])
-      @repository[:name] = repo[:name]
-      @repository[:full_name] = repo[:full_name]
-      @repository[:link] = repo[:html_url]
-      @repository[:language] = repo[:language].downcase
-      @repository[:repo_created_at] = repo[:created_at]
-      @repository[:repo_updated_at] = repo[:updated_at]
+      @repository.name = repo[:name]
+      @repository.full_name = repo[:full_name]
+      @repository.link = repo[:html_url]
+      @repository.language = repo[:language].downcase
+      @repository.repo_created_at = repo[:created_at]
+      @repository.repo_updated_at = repo[:updated_at]
 
       if @repository.save
         redirect_to @repository, notice: t('.success')

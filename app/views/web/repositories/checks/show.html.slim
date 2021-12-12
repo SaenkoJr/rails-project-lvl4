@@ -1,0 +1,27 @@
+- content_for :heading do
+  = t('.check_number', number: @check.id)
+
+hr
+
+dl.row
+  dt.col-2.mb-3 #{t('.created_at')}:
+  dd.col-10.mb-3 = l(@check.created_at)
+
+  dt.col-2.mb-3 #{t('.status')}:
+  dd.col-10.mb-3 = @check.aasm_state
+
+  dt.col-2.mb-3 #{t('.passed')}:
+  dd.col-10.mb-3 = @check.passed
+
+  dt.col-2.mb-3 #{t('.issues_count')}:
+  dd.col-10.mb-3 = @check.issues.count
+
+table.table.table-hover
+  thead
+    tr
+      th scope='col' = t('.file')
+      th scope='col' = t('.rule')
+      th scope='col' = t('.message')
+      th scope='col' = t('.column_line')
+  tbody
+    = render partial: 'web/repositories/checks/issue', collection: @check.issues

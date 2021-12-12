@@ -1,0 +1,6 @@
+tr
+  th scope='row' = issue.file_path
+  td = issue.rule_id
+  td = issue.message
+  td #{issue.column}:#{issue.line}
+

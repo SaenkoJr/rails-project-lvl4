@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     match 'auth/failure', to: 'auth#failure', via: %i[get post], as: :failure_auth
 
     resource :session, only: :destroy
-    resources :repositories
+    resources :repositories do
+      scope module: :repositories do
+        resources :checks, only: %i[show create]
+      end
+    end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_02_161348) do
+ActiveRecord::Schema.define(version: 2021_12_12_154409) do
 
   create_table "repositories", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -26,6 +26,28 @@ ActiveRecord::Schema.define(version: 2021_12_02_161348) do
     t.index ["user_id"], name: "index_repositories_on_user_id"
   end
 
+  create_table "repository_check_issues", force: :cascade do |t|
+    t.text "message"
+    t.text "rule_id"
+    t.string "file_path"
+    t.integer "line"
+    t.integer "column"
+    t.integer "check_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["check_id"], name: "index_repository_check_issues_on_check_id"
+  end
+
+  create_table "repository_checks", force: :cascade do |t|
+    t.string "aasm_state"
+    t.boolean "passed"
+    t.string "commit_reference"
+    t.integer "repository_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["repository_id"], name: "index_repository_checks_on_repository_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "nickname"
@@ -38,4 +60,6 @@ ActiveRecord::Schema.define(version: 2021_12_02_161348) do
   end
 
   add_foreign_key "repositories", "users"
+  add_foreign_key "repository_check_issues", "repository_checks", column: "check_id"
+  add_foreign_key "repository_checks", "repositories"
 end
