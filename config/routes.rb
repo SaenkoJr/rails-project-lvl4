@@ -15,4 +15,8 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  namespace :api do
+    post :checks, to: 'checks#index'
+  end
 end
