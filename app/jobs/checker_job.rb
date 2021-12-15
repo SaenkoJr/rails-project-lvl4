@@ -7,7 +7,7 @@ class CheckerJob < ApplicationJob
     check = Repository::Check.find(check_id)
     checker = ApplicationContainer.resolve(:checker).new(check)
     checker.lint
-  rescue StandartError
+  rescue StandardError
     checker.fail!
   end
 end
