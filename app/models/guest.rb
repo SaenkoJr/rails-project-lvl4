@@ -9,6 +9,10 @@ class Guest
     true
   end
 
+  def token
+    nil
+  end
+
   def token_expired?
     false
   end

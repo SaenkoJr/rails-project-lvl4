@@ -6,6 +6,7 @@ class ApplicationContainer
   if Rails.env.test?
     register :checker, -> { CheckerStub }
     register :repo_loader, -> { RepoLoaderStub }
+    register :github_hook, -> { GithubHookStub }
 
     namespace(:linters) do
       register :javascript, -> { EslintStub }
@@ -14,6 +15,7 @@ class ApplicationContainer
   else
     register :checker, -> { Checker }
     register :repo_loader, -> { RepoLoader }
+    register :github_hook, -> { GithubHook }
 
     namespace(:linters) do
       register :javascript, -> { Eslint }
