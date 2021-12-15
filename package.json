@@ -1,7 +1,9 @@
 {
   "name": "rails-project-lvl4",
   "private": true,
-  "engines": { "node": "16.x" },
+  "engines": {
+    "node": "16.x"
+  },
   "dependencies": {
     "@popperjs/core": "^2.10.2",
     "@rails/actioncable": "^6.0.0",
