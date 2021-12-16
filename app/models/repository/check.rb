@@ -20,7 +20,7 @@ class Repository::Check < ApplicationRecord
       transitions from: :running, to: :finished
     end
 
-    event :fail do
+    event :fail, after: :send_check_report do
       transitions from: %i[created running finished], to: :failed
     end
   end
