@@ -1,0 +1,13 @@
+en:
+  check_mailer:
+    linter_report:
+      subject: Linter report
+      check_number: 'Check number: #%{check_id}'
+      repository: 'Repository name: %{repository_name}'
+      message: Quality code check has failed
+    crash_report:
+      subject: Crash report
+      check_number: 'Check number: #%{check_id}'
+      repository: 'Repository name: %{repository_name}'
+      crash_msg: 'Check failed with error: %{error}'
+

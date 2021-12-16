@@ -47,6 +47,14 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
   end
 
+  test 'GET #show (the user cannot view the repository of other users)' do
+    sign_in_as_with_github(:two)
+
+    get repository_path(repositories(:one))
+
+    assert_redirected_to root_path
+  end
+
   test 'GET #show (signed in user can see repository)' do
     sign_in_as_with_github(:one)
 

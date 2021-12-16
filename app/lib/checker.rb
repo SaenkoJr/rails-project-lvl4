@@ -1,30 +1,32 @@
 # frozen_string_literal: true
 
 class Checker
-  def initialize(check)
+  def initialize(check, user)
     @check = check
+    @user = user
   end
 
   def lint
     @check.run!
 
     loader = ApplicationContainer.resolve(:repo_loader)
-    _, exit_status = loader.clone(@check.repository.link, @check.repository.full_name)
+    _, stderr, exit_status = loader.clone(@check.repository.link, @check.repository.full_name)
 
-    if exit_status.exitstatus.positive?
-      @check.fail! and return
+    unless exit_status.success?
+      raise stderr
     end
 
     linter = ApplicationContainer.resolve("linters.#{@check.repository.language}")
-    issues, exit_code = linter.lint(loader.repo_dest(@check.repository.full_name))
+    issues, linter_exit_status = linter.lint(loader.repo_dest(@check.repository.full_name))
 
-    if exit_code.positive?
+    unless linter_exit_status.success?
       @check.passed = false
       @check.issues.create(issues)
       @check.save!
+      CheckMailer.with(user: @user, check: @check).linter_report.deliver_later
     end
 
-    @check.update(passed: true) if exit_code.zero?
+    @check.update(passed: true) if linter_exit_status.success?
 
     @check.finish!
   end

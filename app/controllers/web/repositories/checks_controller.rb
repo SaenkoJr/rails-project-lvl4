@@ -3,14 +3,19 @@
 module Web
   module Repositories
     class ChecksController < Web::Repositories::ApplicationController
+      after_action :verify_authorized
+
       def show
         @check = Repository::Check.find(params[:id])
+        authorize @check
       end
 
       def create
         @check = Repository::Check.new(repository_id: params[:repository_id])
+        authorize @check
+
         if @check.save
-          CheckerJob.perform_later(@check.id)
+          CheckerJob.perform_later(@check.id, current_user.id)
           flash[:notice] = t('.success')
         else
           flash[:alert] = t('.failure')

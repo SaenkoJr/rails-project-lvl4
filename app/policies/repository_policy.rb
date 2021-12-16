@@ -6,7 +6,7 @@ class RepositoryPolicy < ApplicationPolicy
   end
 
   def show?
-    !user.guest?
+    !user.guest? && author?
   end
 
   def create?

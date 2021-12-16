@@ -1,5 +1,5 @@
 body
   h1 = t('.check_number', check_id: @check.id)
   h4 = t('.repository', repository_name: @check.repository.full_name)
-  p = t('.message')
+  p = t('.crash_msg', error: @error)
   = link_to t(:show), repository_check_url(@check.repository_id, @check.id)

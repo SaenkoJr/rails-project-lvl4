@@ -7,7 +7,7 @@ class Rubocop
 
       Open3.popen2(command) do |_stdin, stdout, wait_thr|
         issues = parse(stdout.read)
-        [issues.flatten, wait_thr.value.exitstatus]
+        [issues.flatten, wait_thr.value]
       end
     end
 

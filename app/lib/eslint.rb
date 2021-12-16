@@ -7,7 +7,7 @@ class Eslint
 
       Open3.popen2(command) do |_stdin, stdout, wait_thr|
         issues = parse(stdout.readlines[2])
-        [issues, wait_thr.value.exitstatus]
+        [issues, wait_thr.value]
       end
     end
 

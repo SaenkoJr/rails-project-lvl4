@@ -7,7 +7,7 @@
         ul.nav.nav-pills.flex-grow-1.navbar.me-auto
           li.nav-item
             = link_to t(:home), root_path, class: 'nav-link text-dark'
-          - if signed_in?
+          - if policy(Repository).index?
             li.nav-item
               = link_to t('.repositories'), repositories_path, class: 'nav-link text-dark'
     ul.nav

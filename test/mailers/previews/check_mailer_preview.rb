@@ -7,4 +7,11 @@ class CheckMailerPreview < ActionMailer::Preview
     check = Repository::Check.failed.first
     CheckMailer.with(user: user, check: check).linter_report
   end
+
+  def crash_report
+    user = User.first
+    check = Repository::Check.failed.first
+    error = StandardError.new 'Something went wrong'
+    CheckMailer.with(user: user, check: check, error: error.message).crash_report
+  end
 end

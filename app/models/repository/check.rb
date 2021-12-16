@@ -20,12 +20,16 @@ class Repository::Check < ApplicationRecord
       transitions from: :running, to: :finished
     end
 
-    event :fail, after: :send_check_report do
+    event :fail, after: proc { |error| send_crash_report(error) } do
       transitions from: %i[created running finished], to: :failed
     end
   end
 
-  def send_check_report
-    CheckMailer.with(user: repository.user, check: self).linter_report.deliver_later
+  def send_crash_report(error)
+    CheckMailer.with(
+      user: repository.user,
+      check: self,
+      error: error
+    ).crash_report.deliver_later
   end
 end
