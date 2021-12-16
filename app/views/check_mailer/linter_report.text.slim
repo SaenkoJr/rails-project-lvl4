@@ -1,0 +1,3 @@
+= t('.check_number: ', check_id: @check.id)
+= t('.repository: ', repository_name: @check.repository.name)
+= link_to t(:show), repository_check_url(@check.repository_id, @check)

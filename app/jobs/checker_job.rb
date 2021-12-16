@@ -8,6 +8,6 @@ class CheckerJob < ApplicationJob
     checker = ApplicationContainer.resolve(:checker).new(check)
     checker.lint
   rescue StandardError
-    checker.fail!
+    check.fail!
   end
 end

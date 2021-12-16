@@ -24,4 +24,8 @@ class Repository::Check < ApplicationRecord
       transitions from: %i[created running finished], to: :failed
     end
   end
+
+  def send_check_report
+    CheckMailer.with(user: repository.user, check: self).linter_report.deliver_later
+  end
 end

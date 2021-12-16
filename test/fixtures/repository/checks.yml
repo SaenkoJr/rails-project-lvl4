@@ -1,3 +1,13 @@
-one:
+passed:
   repository: one
+  aasm_state: finished
+  passed: true
+
+not_passed:
+  repository: one
+  aasm_state: finished
   passed: false
+
+failed:
+  repository: one
+  aasm_state: failed

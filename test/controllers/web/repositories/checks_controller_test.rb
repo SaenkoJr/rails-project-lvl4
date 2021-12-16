@@ -5,7 +5,7 @@ require 'test_helper'
 class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
   setup do
     @repository = repositories(:one)
-    @check = repository_checks(:one)
+    @check = repository_checks(:passed)
   end
 
   test 'GET #show' do
