@@ -24,21 +24,21 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'GET #new (signed in user can get new page)' do
-    # api_github_url = URI::HTTPS.build(
-    #   host: 'api.github.com',
-    #   path: '/user/repos',
-    #   query: 'per_page=200'
-    # )
-    # response = load_fixture('files/repositories_response.json')
+    api_github_url = URI::HTTPS.build(
+      host: 'api.github.com',
+      path: '/user/repos',
+      query: 'per_page=200'
+    )
+    response = load_fixture('files/repositories_response.json')
 
-    # sign_in_as_with_github(:one)
+    sign_in_as_with_github(:one)
 
-    # stub_request(:get, api_github_url)
-    #   .to_return(
-    #     status: 200,
-    #     body: response,
-    #     headers: { 'Content-Type': 'application/json' }
-    #   )
+    stub_request(:get, api_github_url)
+      .to_return(
+        status: 200,
+        body: response,
+        headers: { 'Content-Type': 'application/json' }
+      )
 
     get new_repository_path
 
