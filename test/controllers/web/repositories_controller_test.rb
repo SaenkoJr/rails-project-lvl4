@@ -24,7 +24,11 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'GET #new (signed in user can get new page)' do
-    api_github_url = URI::HTTPS.build(host: 'api.github.com', path: '/user/repos')
+    api_github_url = URI::HTTPS.build(
+      host: 'api.github.com',
+      path: '/user/repos',
+      query: 'per_page=200'
+    )
     response = load_fixture('files/repositories_response.json')
 
     sign_in_as_with_github(:one)

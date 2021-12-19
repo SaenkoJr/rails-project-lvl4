@@ -243,6 +243,9 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (2.2.0)
+    responders (3.0.1)
+      actionpack (>= 5.0)
+      railties (>= 5.0)
     rexml (3.2.5)
     rollbar (3.3.0)
     rubocop (1.23.0)
@@ -363,6 +366,7 @@ DEPENDENCIES
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4, >= 6.1.4.1)
   rails-i18n
+  responders
   rollbar
   rubocop
   rubocop-performance

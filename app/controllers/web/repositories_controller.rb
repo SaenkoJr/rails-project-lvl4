@@ -55,7 +55,10 @@ module Web
     private
 
     def set_github_client
-      @client = Octokit::Client.new(access_token: current_user.token)
+      @client = Octokit::Client.new(
+        access_token: current_user.token,
+        per_page: 200
+      )
     end
 
     def repository_params
