@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 class Checker
-  def initialize(check, user)
+  def initialize(check)
     @check = check
-    @user = user
   end
 
-  def lint
+  def run
     @check.run!
 
     loader = ApplicationContainer.resolve(:repo_loader)
@@ -23,7 +22,7 @@ class Checker
       @check.passed = false
       @check.issues.create(issues)
       @check.save!
-      CheckMailer.with(user: @user, check: @check).linter_report.deliver_later
+      CheckMailer.with(user: @check.repository.user, check: @check).linter_report.deliver_later
     end
 
     @check.update(passed: true) if linter_exit_status.success?

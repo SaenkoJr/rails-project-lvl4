@@ -7,7 +7,7 @@ module Web
     private
 
     def user_not_authorized
-      redirect_to root_path, alert: t(:not_authorized)
+      redirect_to root_path, alert: t(:unauthorized)
     end
   end
 end

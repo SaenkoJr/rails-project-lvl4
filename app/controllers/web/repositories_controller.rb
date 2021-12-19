@@ -44,7 +44,7 @@ module Web
       @repository.repo_updated_at = repo[:updated_at]
 
       if @repository.save
-        ApplicationContainer[:github_hook].new(@client).create(@repository)
+        GithubHookJob.perform_later(@repository.id, current_user.token)
         redirect_to @repository, notice: t('.success')
       else
         flash[:alert] = t('.failure')

@@ -9,7 +9,7 @@
             = link_to t(:home), root_path, class: 'nav-link text-dark'
           - if policy(Repository).index?
             li.nav-item
-              = link_to t('.repositories'), repositories_path, class: 'nav-link text-dark'
+              = link_to t(:repositories), repositories_path, class: 'nav-link text-dark'
     ul.nav
       - if signed_in?
         li.dropdown

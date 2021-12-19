@@ -1,5 +1,13 @@
 en:
   web:
+    home:
+      index:
+        heading: Github repository quality analyzer
+        description: |
+          A service where teams can track the quality of their public repositories.
+    auth:
+      callback:
+        success: You are successfully signed in
     repositories:
       index:
         heading: Repositories
@@ -10,3 +18,31 @@ en:
         language: Language
       new:
         heading: New repository
+      show:
+        check: Check
+        name: Name
+        language: Language
+        created_at: Created at
+        updated_at: Updated at
+        id: ID
+        state: Check status
+        reference: Commit reference
+        passed: Passed
+      create:
+        empty_github_id: Please select repository
+        success: Repository was created
+        failure: Repository was not created
+      checks:
+        show:
+          status: Status
+          check_number: 'Check #%{number}'
+          created_at: Created at
+          passed: Check passed
+          issue_count: Issues count
+          file: File
+          rule: Rule
+          message: Issue message
+          line_column: Line:Column
+        create:
+          success: Check was created
+          failure: Check was not created
