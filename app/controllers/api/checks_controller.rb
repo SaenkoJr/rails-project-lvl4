@@ -7,7 +7,7 @@ module Api
       check = repo.checks.build
       CheckerJob.perform_later(check.id) if check.save
 
-      respond_with :api, check
+      render json: check, status: :ok
     end
   end
 end

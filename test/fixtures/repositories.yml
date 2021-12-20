@@ -1,4 +1,5 @@
 one:
+  github_id: 1
   name: $LABEL
   full_name: one/$LABEL
   user: one
@@ -8,6 +9,7 @@ one:
   repo_updated_at: <%= DateTime.current %>
 
 two:
+  github_id: 2
   name: $LABEL
   full_name: one/$LABEL
   user: one
@@ -17,6 +19,7 @@ two:
   repo_updated_at: <%= DateTime.current %>
 
 three:
+  github_id: 3
   name: $LABEL
   full_name: two/$LABEL
   user: two
