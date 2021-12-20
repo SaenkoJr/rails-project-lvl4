@@ -15,7 +15,7 @@ module Web
         authorize @check
 
         if @check.save
-          CheckerJob.perform_later(@check.id)
+          CheckRepositoryJob.perform_later(@check.id)
           flash[:notice] = t('.success')
         else
           flash[:alert] = t('.failure')

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CheckerJob < ApplicationJob
+class CheckRepositoryJob < ApplicationJob
   queue_as :repository
 
   def perform(check_id)

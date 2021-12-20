@@ -5,7 +5,7 @@ module Api
     def index
       repo = Repository.find_by(github_id: params[:repository][:id])
       check = repo.checks.build
-      CheckerJob.perform_later(check.id) if check.save
+      CheckRepositoryJob.perform_later(check.id) if check.save
 
       render json: check, status: :ok
     end
