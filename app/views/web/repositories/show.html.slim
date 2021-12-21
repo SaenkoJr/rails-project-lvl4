@@ -3,9 +3,6 @@
 
 = link_to t('.check'), repository_checks_path(@repository), method: :post, class: 'btn btn-sm btn-outline-info'
 
-- pp '-------------------------------------'
-- pp @repository
-
 hr
 
 dl.row
@@ -16,10 +13,10 @@ dl.row
   dd.col-10.mb-3 = @repository.language
 
   dt.col-2.mb-3 #{t('.created_at')}:
-  dd.col-10.mb-3 = l(@repository.repo_created_at)
+  dd.col-10.mb-3 = l(@repository.created_at)
 
   dt.col-2.mb-3 #{t('.updated_at')}:
-  dd.col-10.mb-3 = l(@repository.repo_updated_at)
+  dd.col-10.mb-3 = l(@repository.updated_at)
 
 hr
 
