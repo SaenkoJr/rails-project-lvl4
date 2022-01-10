@@ -1,17 +1,25 @@
 created:
   repository: one
   aasm_state: created
+  commit_reference: $LABEL
+  commit_reference_url: www.$LABEL.com
 
 passed:
   repository: one
   aasm_state: finished
   passed: true
+  commit_reference: $LABEL
+  commit_reference_url: www.$LABEL.com
 
 not_passed:
   repository: one
   aasm_state: finished
   passed: false
+  commit_reference: $LABEL
+  commit_reference_url: www.$LABEL.com
 
 failed:
   repository: one
   aasm_state: failed
+  commit_reference: $LABEL
+  commit_reference_url: www.$LABEL.com

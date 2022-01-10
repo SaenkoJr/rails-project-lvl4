@@ -15,6 +15,15 @@ class GithubClientStub
     []
   end
 
+  def commits(_id)
+    [
+      {
+        sha: '123456',
+        html_url: 'www.htmlurl.com'
+      }
+    ]
+  end
+
   def create_hook(_repository)
     load_fixture('hook.json')
   end

@@ -17,6 +17,10 @@ class GithubClient
     @client.hooks(id)
   end
 
+  def commits(id, branch: :master)
+    @client.commits(id, branch: branch)
+  end
+
   def create_hook(repository)
     return if hook_exists?(repository.github_id)
 
