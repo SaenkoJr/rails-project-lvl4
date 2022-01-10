@@ -3,7 +3,6 @@
 DEFAULTS: &DEFAULTS
   email: $LABEL@test.io
   nickname: $LABEL
-  token_expires_at: DateTime.tomorrow
 
 one:
   <<: *DEFAULTS

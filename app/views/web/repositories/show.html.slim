@@ -9,6 +9,9 @@ dl.row
   dt.col-2.mb-3 #{t('.name')}:
   dd.col-10.mb-3 = @repository.name
 
+  dt.col-2.mb-3 #{t('.link')}:
+  dd.col-10.mb-3 = link_to @repository.link, @repository.link, target: '_blank', class: 'link-info text-decoration-none'
+
   dt.col-2.mb-3 #{t('.language')}:
   dd.col-10.mb-3 = @repository.language
 

@@ -2,12 +2,26 @@
 
 module Api
   class ChecksController < Api::ApplicationController
-    def index
+    def create
       repo = Repository.find_by(github_id: params[:repository][:id])
-      check = repo.checks.build
-      CheckRepositoryJob.perform_later(check.id) if check.save
+      commit_ref = params.dig(:head_commit, :id)
+      commit_ref_url = params.dig(:head_commit, :url)
 
-      render json: check, status: :ok
+      if repo.nil?
+        render json: { error: t('.not_found') }, status: :not_found and return
+      end
+
+      check = repo.checks.build(
+        commit_reference: commit_ref,
+        commit_reference_url: commit_ref_url
+      )
+      if check.save
+        CheckRepositoryJob.perform_later(check.id)
+
+        render json: check, status: :ok
+      else
+        render json: { error: t('.error') }, status: :unprocessable_entity
+      end
     end
   end
 end

@@ -19,6 +19,6 @@
             li
               h5.dropdown-header= current_user.nickname
             .dropdown-divider
-            li= link_to t(:sign_out), session_path, method: :delete, class: 'dropdown-item'
+            li= link_to t(:sign_out), sign_out_path, method: :delete, class: 'dropdown-item'
       - else
         li= link_to t(:github_auth), auth_request_path(:github), method: :post, class: 'nav-link link-dark'

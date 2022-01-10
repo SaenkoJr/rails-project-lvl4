@@ -24,21 +24,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'GET #new (signed in user can get new page)' do
-    api_github_url = URI::HTTPS.build(
-      host: 'api.github.com',
-      path: '/user/repos',
-      query: 'per_page=200'
-    )
-    response = load_fixture('files/repositories_response.json')
-
     sign_in_as_with_github(:one)
-
-    stub_request(:get, api_github_url)
-      .to_return(
-        status: 200,
-        body: response,
-        headers: { 'Content-Type': 'application/json' }
-      )
 
     get new_repository_path
 
@@ -82,25 +68,20 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   test 'POST #create (signed in user can create repository)' do
     sign_in_as_with_github(:one)
 
-    repos = load_fixture('files/repositories_response.json')
-    repo = JSON.parse(repos, symbolize_names: true).first
-    api_github_url = URI::HTTPS.build(host: 'api.github.com', path: "/repositories/#{repo[:id]}")
-    response = repo.to_json
-
-    stub_request(:get, api_github_url)
-      .to_return(
-        status: 200,
-        body: response,
-        headers: { 'Content-Type': 'application/json' }
-      )
+    json = file_fixture('repository.json').read
+    attrs = JSON.parse(json, symbolize_names: true)
 
     params = {
-      repository: { github_id: repo[:id] }
+      repository: { github_id: attrs[:id] }
     }
 
     assert_difference('Repository.count', +1) do
       post repositories_path, params: params
-      assert_redirected_to Repository.last
+
+      repo = Repository.find_by(github_id: attrs[:id])
+      assert_redirected_to repository_path(repo)
+      assert { repo.created? }
+      assert_enqueued_with job: UpdateInfoRepositoryJob
     end
   end
 end

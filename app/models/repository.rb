@@ -29,4 +29,10 @@ class Repository < ApplicationRecord
       transitions from: :fetching, to: :failed
     end
   end
+
+  def hooks
+    client = ApplicationContainer[:github_client].new(user.token)
+
+    client.hooks(github_id)
+  end
 end

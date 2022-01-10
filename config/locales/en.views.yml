@@ -14,7 +14,7 @@ en:
         id: ID
         github_id: Github ID
         name: Name
-        link: Github link
+        last_check: Last check passed
         language: Language
       new:
         heading: New repository
@@ -22,6 +22,7 @@ en:
         check: Check
         name: Name
         language: Language
+        link: Github link
         created_at: Created at
         updated_at: Updated at
         id: ID
@@ -46,3 +47,7 @@ en:
         create:
           success: Check was created
           failure: Check was not created
+  api:
+    checks:
+      not_found: Repository not found
+      error: Something went wrong

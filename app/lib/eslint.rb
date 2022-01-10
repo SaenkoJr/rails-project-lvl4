@@ -1,23 +1,26 @@
 # frozen_string_literal: true
 
 class Eslint
-  class << self
-    def lint(path)
-      command = "yarn run eslint --no-eslintrc -c #{Rails.root.join('.eslintrc.json')} -f json #{path}"
+  include Import[:bash_runner]
 
-      Open3.popen2(command) do |_stdin, stdout, wait_thr|
-        issues = parse(stdout.readlines[2])
-        [issues, wait_thr.value]
-      end
-    end
+  def lint(path)
+    command = "npx eslint --no-eslintrc -c #{Rails.root.join('.eslintrc.json')} -f json #{path}"
 
-    private
+    stdout, _stderr, exit_status = bash_runner.start(command)
+    issues = parse(stdout)
+    [issues, exit_status]
+  end
 
-    def parse(output)
-      JSON.parse(output, symbolize_names: true).map do |error|
-        error[:messages].map do |msg|
+  private
+
+  def parse(output)
+    issues = JSON.parse(output, symbolize_names: true)
+    issues
+      .reject { |issue| issue[:messages].empty? }
+      .map do |issue|
+        issue[:messages].map do |msg|
           {
-            file_path: error[:filePath],
+            file_path: issue[:filePath],
             rule_id: msg[:ruleId],
             message: msg[:message],
             line: msg[:line],
@@ -25,6 +28,5 @@ class Eslint
           }
         end
       end.flatten
-    end
   end
 end

@@ -4,7 +4,8 @@ one:
   full_name: one/$LABEL
   user: one
   link: www.$LABEL.com
-  language: $LABEL
+  language: javascript
+  aasm_state: fetched
   repo_created_at: <%= DateTime.current %>
   repo_updated_at: <%= DateTime.current %>
 
@@ -14,16 +15,12 @@ two:
   full_name: one/$LABEL
   user: one
   link: www.$LABEL.com
-  language: $LABEL
+  language: ruby
+  aasm_state: fetched
   repo_created_at: <%= DateTime.current %>
   repo_updated_at: <%= DateTime.current %>
 
-three:
+created:
   github_id: 3
-  name: $LABEL
-  full_name: two/$LABEL
-  user: two
-  link: www.$LABEL.com
-  language: $LABEL
-  repo_created_at: <%= DateTime.current %>
-  repo_updated_at: <%= DateTime.current %>
+  user: one
+  aasm_state: created

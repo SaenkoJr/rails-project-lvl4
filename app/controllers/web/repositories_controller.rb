@@ -2,10 +2,7 @@
 
 module Web
   class RepositoriesController < Web::ApplicationController
-    before_action :verify_token
     after_action :verify_authorized
-
-    before_action :set_github_client, only: %i[new]
 
     def index
       authorize Repository
@@ -16,9 +13,7 @@ module Web
       @repository = Repository.new
       authorize @repository
 
-      @repos = @client.repos
-                      .filter { |repo| !repo.language.nil? }
-                      .filter { |repo| AVAILABLE_LANGUAGES.include? repo.language.downcase }
+      @repos = current_user.repos
     end
 
     def show
@@ -33,10 +28,11 @@ module Web
         redirect_to new_repository_path, alert: t('.empty_github_id') and return
       end
 
-      @repository = current_user.repositories.find_or_initialize_by(github_id: repository_params[:github_id])
+      @repository = current_user.repositories
+                                .find_or_initialize_by(github_id: repository_params[:github_id])
 
       if @repository.save
-        UpdateInfoRepositoryJob.perform_later(repository_params[:github_id], current_user.token)
+        UpdateInfoRepositoryJob.perform_later(@repository.id)
         redirect_to @repository, notice: t('.success')
       else
         flash[:alert] = t('.failure')
@@ -45,13 +41,6 @@ module Web
     end
 
     private
-
-    def set_github_client
-      @client = Octokit::Client.new(
-        access_token: current_user.token,
-        per_page: 200
-      )
-    end
 
     def repository_params
       params.require(:repository).permit(:github_id)

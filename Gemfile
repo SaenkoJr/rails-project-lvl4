@@ -63,6 +63,7 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'aasm'
+gem 'dry-auto_inject'
 gem 'dry-container'
 gem 'enumerize'
 gem 'octokit', '~> 4.0'

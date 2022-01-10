@@ -1,3 +1,7 @@
+created:
+  repository: one
+  aasm_state: created
+
 passed:
   repository: one
   aasm_state: finished

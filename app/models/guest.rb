@@ -9,6 +9,10 @@ class Guest
     true
   end
 
+  def repos
+    []
+  end
+
   def token
     nil
   end

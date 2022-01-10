@@ -1,0 +1,17 @@
+{
+  "type": "Repository",
+  "id": 12345678,
+  "name": "web",
+  "active": true,
+  "events": [
+    "push",
+    "pull_request"
+  ],
+  "config": {
+    "content_type": "json",
+    "insecure_ssl": "0",
+    "url": "https://example.com/api/checks"
+  },
+  "updated_at": "2019-06-03T00:57:16Z",
+  "created_at": "2019-06-03T00:57:16Z"
+}

@@ -3,7 +3,7 @@
 require 'test_helper'
 
 class Api::ChecksControllerTest < ActionDispatch::IntegrationTest
-  test 'POST #index' do
+  test 'POST #create' do
     repo = repositories(:one)
 
     payload = {
@@ -13,5 +13,15 @@ class Api::ChecksControllerTest < ActionDispatch::IntegrationTest
     post api_checks_url(params: payload)
 
     assert_response :ok
+  end
+
+  test 'POST #create (repository not found)' do
+    payload = {
+      repository: { id: 42 }
+    }
+
+    post api_checks_url(params: payload)
+
+    assert_response :not_found
   end
 end

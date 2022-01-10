@@ -3,15 +3,16 @@
 module Web
   module Repositories
     class ChecksController < Web::Repositories::ApplicationController
+      before_action :set_repo
       after_action :verify_authorized
 
       def show
-        @check = Repository::Check.find(params[:id])
+        @check = @repo.checks.find(params[:id])
         authorize @check
       end
 
       def create
-        @check = Repository::Check.new(repository_id: params[:repository_id])
+        @check = @repo.checks.build
         authorize @check
 
         if @check.save
@@ -22,6 +23,12 @@ module Web
         end
 
         redirect_to repository_path(params[:repository_id])
+      end
+
+      private
+
+      def set_repo
+        @repo = Repository.find(params[:repository_id])
       end
     end
   end

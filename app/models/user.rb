@@ -12,4 +12,11 @@ class User < ApplicationRecord
 
     Time.zone.at(token_expires_at).to_datetime <= DateTime.current
   end
+
+  def repos
+    client = ApplicationContainer[:github_client].new(token)
+
+    client.repos
+          .filter { |repo| AVAILABLE_LANGUAGES.include? repo[:language]&.downcase }
+  end
 end

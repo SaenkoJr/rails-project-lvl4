@@ -46,5 +46,6 @@ class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to repository_path(@repository)
     assert { check.created? }
     assert { check.repository == @repository }
+    assert_enqueued_with job: CheckRepositoryJob
   end
 end

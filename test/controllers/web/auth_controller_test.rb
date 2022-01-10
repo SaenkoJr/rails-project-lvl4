@@ -18,4 +18,14 @@ class Web::AuthControllerTest < ActionDispatch::IntegrationTest
     assert { user }
     assert { signed_in? }
   end
+
+  test 'sign out' do
+    sign_in_as_with_github(:one)
+    assert { signed_in? }
+
+    delete sign_out_path
+
+    assert_redirected_to root_path
+    assert { !signed_in? }
+  end
 end
