@@ -6,9 +6,16 @@ class Rubocop
   def lint(path)
     command = "bundle exec rubocop --format json #{path}"
 
-    stdout, _stderr, exit_status = bash_runner.start(command)
-    issues = parse(stdout)
-    [issues, exit_status]
+    stdout, stderr, exit_status = bash_runner.start(command)
+
+    unless stderr.empty?
+      raise stderr
+    end
+
+    {
+      passed: exit_status.success?,
+      issues: parse(stdout)
+    }
   end
 
   private

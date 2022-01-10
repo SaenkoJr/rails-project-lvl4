@@ -6,9 +6,16 @@ class Eslint
   def lint(path)
     command = "npx eslint --no-eslintrc -c #{Rails.root.join('.eslintrc.json')} -f json #{path}"
 
-    stdout, _stderr, exit_status = bash_runner.start(command)
-    issues = parse(stdout)
-    [issues, exit_status]
+    stdout, stderr, exit_status = bash_runner.start(command)
+
+    unless stderr.empty?
+      raise stderr
+    end
+
+    {
+      passed: exit_status.success?,
+      issues: parse(stdout)
+    }
   end
 
   private

@@ -21,15 +21,15 @@ class CheckerService
     end
 
     linter = LINTERS[repository.language.to_sym].new
-    issues, linter_exit_status = linter.lint(loader.repo_dest(repository.full_name))
+    result = linter.lint(loader.repo_dest(repository.full_name))
 
-    if linter_exit_status.success?
+    if result[:passed]
       check.update(passed: true)
       return check.finish!
     end
 
     check.passed = false
-    check.issues.create(issues)
+    check.issues.create(result[:issues])
     check.finish
     check.save!
     CheckMailer.with(user: repository.user, check: check).linter_report.deliver_later
