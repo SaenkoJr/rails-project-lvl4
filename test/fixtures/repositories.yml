@@ -6,8 +6,6 @@ one:
   link: www.$LABEL.com
   language: javascript
   aasm_state: fetched
-  repo_created_at: <%= DateTime.current %>
-  repo_updated_at: <%= DateTime.current %>
 
 two:
   github_id: 2
@@ -17,8 +15,6 @@ two:
   link: www.$LABEL.com
   language: ruby
   aasm_state: fetched
-  repo_created_at: <%= DateTime.current %>
-  repo_updated_at: <%= DateTime.current %>
 
 created:
   github_id: 3

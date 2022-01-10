@@ -14,8 +14,6 @@ class RepositoryService
     repo.full_name = data[:full_name]
     repo.link = data[:html_url]
     repo.language = data[:language].downcase
-    repo.repo_created_at = data[:created_at]
-    repo.repo_updated_at = data[:updated_at]
     repo.done
     repo.save!
   rescue StandardError

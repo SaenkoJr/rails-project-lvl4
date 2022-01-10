@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_10_095021) do
+ActiveRecord::Schema.define(version: 2022_01_10_191133) do
 
   create_table "repositories", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -19,11 +19,8 @@ ActiveRecord::Schema.define(version: 2022_01_10_095021) do
     t.string "full_name"
     t.string "link"
     t.string "language"
-    t.datetime "repo_created_at"
-    t.datetime "repo_updated_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "hook_id"
     t.string "aasm_state"
     t.index ["user_id"], name: "index_repositories_on_user_id"
   end
@@ -58,7 +55,6 @@ ActiveRecord::Schema.define(version: 2022_01_10_095021) do
     t.text "token"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "refresh_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["nickname"], name: "index_users_on_nickname", unique: true
   end
