@@ -29,6 +29,7 @@ en:
         state: Check status
         commit_ref: Commit reference
         passed: Passed
+        fetching: Repository data is fetching
       create:
         empty_github_id: Please select repository
         success: Repository was created
