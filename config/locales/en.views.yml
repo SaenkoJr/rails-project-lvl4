@@ -27,7 +27,7 @@ en:
         updated_at: Updated at
         id: ID
         state: Check status
-        reference: Commit reference
+        commit_ref: Commit reference
         passed: Passed
       create:
         empty_github_id: Please select repository

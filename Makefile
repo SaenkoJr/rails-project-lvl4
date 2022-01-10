@@ -34,4 +34,7 @@ heroku-start:
 heroku-rails-console:
 	heroku run rails console
 
+heroku-logs:
+	heroku logs --tail
+
 .PHONY: test
