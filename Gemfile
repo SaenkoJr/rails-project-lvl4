@@ -37,9 +37,6 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'rubocop'
-  gem 'rubocop-performance'
-  gem 'rubocop-rails'
   gem 'sqlite3', '~> 1.4'
 end
 
@@ -73,5 +70,8 @@ gem 'pundit'
 gem 'rails-i18n'
 gem 'responders'
 gem 'rollbar'
+gem 'rubocop'
+gem 'rubocop-performance'
+gem 'rubocop-rails'
 gem 'simple_form'
 gem 'slim-rails'
