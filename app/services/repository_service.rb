@@ -4,13 +4,12 @@ class RepositoryService
   include Import[:github_client]
 
   def update_info(id)
-    repo = Repository.find(id)
-    repo.fetch!
-
     pp '------------------------------------------'
     pp id
-    pp repo
     pp '------------------------------------------'
+
+    repo = Repository.find(id)
+    repo.fetch!
 
     client = github_client.new(repo.user.token)
     data = client.repo(repo.github_id)
@@ -26,6 +25,7 @@ class RepositoryService
     pp e
     pp '------------------------------------------'
     repo.fail!
+    raise e
   end
 
   def create_hook(repo_id)
