@@ -3,12 +3,7 @@
 class RepositoryService
   include Import[:github_client]
 
-  def update_info(id)
-    pp '------------------------------------------'
-    pp id
-    pp '------------------------------------------'
-
-    repo = Repository.find(id)
+  def update_info(repo)
     repo.fetch!
 
     client = github_client.new(repo.user.token)
@@ -21,9 +16,6 @@ class RepositoryService
     repo.done
     repo.save!
   rescue StandardError => e
-    pp '------------------------------------------'
-    pp e
-    pp '------------------------------------------'
     repo.fail!
     raise e
   end
