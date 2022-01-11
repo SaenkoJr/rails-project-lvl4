@@ -26,7 +26,7 @@ module Web
         @check.commit_reference_url = commit[:html_url]
 
         if @check.save
-          CheckRepositoryJob.perform_later(@check.id)
+          CheckRepositoryJob.perform_later(@check)
           flash[:notice] = t('.success')
         else
           flash[:alert] = t('.failure')

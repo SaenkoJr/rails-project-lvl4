@@ -6,7 +6,7 @@ class CheckRepositoryJobTest < ActiveJob::TestCase
   test 'run check' do
     check = repository_checks(:created)
 
-    CheckRepositoryJob.perform_now(check.id)
+    CheckRepositoryJob.perform_now(check)
     check.reload
 
     assert { check.finished? }

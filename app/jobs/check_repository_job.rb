@@ -3,10 +3,7 @@
 class CheckRepositoryJob < ApplicationJob
   queue_as :repository
 
-  def perform(check_id)
-    pp '------------------------------------------'
-    pp check_id
-    pp '------------------------------------------'
-    CheckerService.new.run(check_id)
+  def perform(check)
+    CheckerService.new.run(check.id)
   end
 end

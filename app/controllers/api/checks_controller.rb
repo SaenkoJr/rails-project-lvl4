@@ -16,7 +16,7 @@ module Api
         commit_reference_url: commit_ref_url
       )
       if check.save
-        CheckRepositoryJob.perform_later(check.id)
+        CheckRepositoryJob.perform_later(check)
 
         render json: check, status: :ok
       else
