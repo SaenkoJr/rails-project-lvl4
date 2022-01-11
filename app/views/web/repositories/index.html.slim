@@ -15,9 +15,9 @@ table.table.table-hover
   tbody
     - @repositories.each do |repo|
       tr
-        th scope='row' = link_to repo.id, repository_path(repo), class: 'link-info text-decoration-none'
+        th scope='row' = repo.id
         td = link_to repo.github_id, repo.link, target: '_blank', class: 'link-info text-decoration-none'
-        td = repo.full_name
+        td = link_to repo.full_name, repository_path(repo), class: 'link-info text-decoration-none'
         td = repo.checks.empty? ? '-' : repo.last_check
         td = repo.language
 
