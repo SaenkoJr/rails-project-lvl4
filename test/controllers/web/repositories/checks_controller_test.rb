@@ -22,19 +22,19 @@ class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'POST #create (guest must be redirected)' do
-    post repository_checks_path(@repository)
+  # test 'POST #create (guest must be redirected)' do
+  #   post repository_checks_path(@repository)
 
-    assert_redirected_to root_path
-  end
+  #   assert_redirected_to root_path
+  # end
 
-  test 'POST #create (the user cannot check repository of other users)' do
-    sign_in_as_with_github(:two)
+  # test 'POST #create (the user cannot check repository of other users)' do
+  #   sign_in_as_with_github(:two)
 
-    post repository_checks_path(@repository)
+  #   post repository_checks_path(@repository)
 
-    assert_redirected_to root_path
-  end
+  #   assert_redirected_to root_path
+  # end
 
   test 'POST #create (signed in user can see repository`s check)' do
     sign_in_as_with_github(:one)
