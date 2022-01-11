@@ -6,6 +6,7 @@ class RepositoryService
   def update_info(repo)
     pp '------------------------------------------'
     pp repo.may_fetch?
+    pp repo.fetch!
     pp '------------------------------------------'
 
     repo.fetch!
