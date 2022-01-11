@@ -7,9 +7,10 @@ class RepositoryService
     pp '------------------------------------------'
     pp repo.may_fetch?
     pp repo.fetch!
+    pp repo
     pp '------------------------------------------'
 
-    repo.fetch!
+    # repo.fetch!
 
     client = github_client.new(repo.user.token)
     data = client.repo(repo.github_id)
