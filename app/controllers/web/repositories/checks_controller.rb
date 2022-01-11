@@ -26,6 +26,9 @@ module Web
         @check.commit_reference_url = commit[:html_url]
 
         if @check.save
+          pp '------------------------------------------'
+          pp @check
+          pp '------------------------------------------'
           CheckRepositoryJob.perform_later(@check)
           flash[:notice] = t('.success')
         else
