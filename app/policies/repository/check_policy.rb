@@ -2,7 +2,9 @@
 
 class Repository::CheckPolicy < ApplicationPolicy
   def show?
-    !user.guest?
+    # !user.guest?
+    # TODO: remove?
+    true
   end
 
   def create?

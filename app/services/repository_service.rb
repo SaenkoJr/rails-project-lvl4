@@ -7,6 +7,11 @@ class RepositoryService
     repo = Repository.find(id)
     repo.fetch!
 
+    pp '------------------------------------------'
+    pp id
+    pp repo
+    pp '------------------------------------------'
+
     client = github_client.new(repo.user.token)
     data = client.repo(repo.github_id)
 
@@ -16,7 +21,7 @@ class RepositoryService
     repo.language = data[:language].downcase
     repo.done
     repo.save!
-  rescue StandardError
+  rescue StandardError => e
     repo.fail!
   end
 

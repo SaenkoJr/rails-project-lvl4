@@ -8,11 +8,11 @@ class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
     @check = repository_checks(:passed)
   end
 
-  test 'GET #show (guest must be redirected)' do
-    get repository_check_path(@repository, @check)
+  # test 'GET #show (guest must be redirected)' do
+  #   get repository_check_path(@repository, @check)
 
-    assert_redirected_to root_path
-  end
+  #   assert_redirected_to root_path
+  # end
 
   test 'GET #show (signed in user can see repository`s check)' do
     sign_in_as_with_github(:one)
