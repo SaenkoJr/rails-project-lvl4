@@ -4,11 +4,11 @@ class RepositoryService
   include Import[:github_client]
 
   def update_info(repo)
-    repo.fetch!
+    pp '------------------------------------------'
+    pp repo.may_fetch?
+    pp '------------------------------------------'
 
-    pp '------------------------------------------'
-    pp repo
-    pp '------------------------------------------'
+    repo.fetch!
 
     client = github_client.new(repo.user.token)
     data = client.repo(repo.github_id)
