@@ -22,6 +22,9 @@ class RepositoryService
     repo.done
     repo.save!
   rescue StandardError => e
+    pp '------------------------------------------'
+    pp e
+    pp '------------------------------------------'
     repo.fail!
   end
 
