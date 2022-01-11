@@ -4,7 +4,7 @@ module Web
   module Repositories
     class ChecksController < Web::Repositories::ApplicationController
       before_action :set_repo
-      after_action :verify_authorized
+      # after_action :verify_authorized
 
       def show
         @check = @repo.checks.find(params[:id])
