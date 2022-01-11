@@ -7,7 +7,7 @@ class UpdateInfoRepositoryJobTest < ActiveJob::TestCase
     repo = repositories(:created)
     response = file_fixture('repository.json').read
 
-    UpdateInfoRepositoryJob.perform_now(repo.id)
+    UpdateInfoRepositoryJob.perform_now(repo)
     repo.reload
 
     assert repo.full_name == JSON.parse(response)['full_name']

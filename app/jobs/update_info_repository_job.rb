@@ -3,10 +3,9 @@
 class UpdateInfoRepositoryJob < ApplicationJob
   queue_as :github
 
-  def perform(id)
-    repo = Repository.find(id)
+  def perform(repo)
     RepositoryService.new.update_info(repo)
 
-    GithubHookJob.perform_later(id)
+    GithubHookJob.perform_later(repo)
   end
 end

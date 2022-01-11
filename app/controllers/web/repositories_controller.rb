@@ -40,7 +40,7 @@ module Web
                                 .find_or_initialize_by(github_id: repository_params[:github_id])
 
       if @repository.save
-        UpdateInfoRepositoryJob.perform_later(@repository.id)
+        UpdateInfoRepositoryJob.perform_later(@repository)
         redirect_to @repository, notice: t('.success')
       else
         flash[:alert] = t('.failure')
