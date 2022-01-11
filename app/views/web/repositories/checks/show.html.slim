@@ -14,14 +14,16 @@ dl.row
   dd.col-10.mb-3 = @check.passed
 
   dt.col-2.mb-3 #{t('.issues_count')}:
-  dd.col-10.mb-3 = @check.issues.count
+  dd.col-10.mb-3 = @check.issues.size
 
 table.table.table-hover
   thead
     tr
-      th scope='col' = t('.file')
-      th scope='col' = t('.rule')
+      th scope='col' = sort_link(@q, :file)
+      th scope='col' = sort_link(@q, :rule)
       th scope='col' = t('.message')
       th scope='col' = t('.line_column')
   tbody
-    = render partial: 'web/repositories/checks/issue', collection: @check.issues
+    = render partial: 'web/repositories/checks/issue', collection: @issues
+
+= paginate @issues

@@ -6,7 +6,10 @@ module Web
 
     def index
       authorize Repository
-      @repositories = current_user.repositories
+      @q = current_user.repositories.ransack(ransack_params)
+      @repositories = @q.result
+                        .page(page)
+                        .per(per_page)
     end
 
     def new
@@ -19,6 +22,11 @@ module Web
     def show
       @repository = Repository.find(params[:id])
       authorize @repository
+
+      @q = @repository.checks.ransack(ransack_params)
+      @checks = @q.result
+                  .page(page)
+                  .per(per_page)
     end
 
     def create

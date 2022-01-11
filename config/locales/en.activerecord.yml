@@ -1,0 +1,18 @@
+en:
+  activerecord:
+    attributes:
+      repository:
+        id: ID
+        github_id: Github ID
+        name: Name
+        language: Language
+        check:
+      repository/check:
+        id: ID
+        aasm_state: Status
+        commit_reference: Commit ref
+        passed: Passed
+        created_at: Created at
+      repository/check/issue:
+        file: File
+        rule: Rule

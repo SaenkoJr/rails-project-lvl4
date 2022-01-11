@@ -9,6 +9,11 @@ module Web
       def show
         @check = @repo.checks.find(params[:id])
         authorize @check
+
+        @q = @check.issues.ransack(ransack_params)
+        @issues = @q.result
+                    .page(page)
+                    .per(per_page)
       end
 
       def create

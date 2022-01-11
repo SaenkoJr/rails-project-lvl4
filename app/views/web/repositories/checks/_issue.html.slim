@@ -1,5 +1,5 @@
 tr
-  th scope='row' = issue.file_path
+  th scope='row' = format_filepath(issue.file_path)
   td = issue.rule_id
   td = issue.message
   td #{issue.line}:#{issue.column}

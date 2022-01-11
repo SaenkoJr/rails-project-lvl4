@@ -40,6 +40,10 @@ class Repository < ApplicationRecord
     commits.first
   end
 
+  def last_check
+    checks.last.passed
+  end
+
   def hooks
     client = ApplicationContainer[:github_client].new(user.token)
 

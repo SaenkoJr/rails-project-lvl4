@@ -31,10 +31,12 @@ hr
 table.table.table-hover
   thead
     tr
-      th scope='col' = t('.id')
-      th scope='col' = t('.state')
-      th scope='col' = t('.commit_ref')
-      th scope='col' = t('.passed')
-      th scope='col' = t('.created_at')
+      th scope='col' = sort_link(@q, :id)
+      th scope='col' = sort_link(@q, :aasm_state)
+      th scope='col' = sort_link(@q, :commit_reference)
+      th scope='col' = sort_link(@q, :passed)
+      th scope='col' = sort_link(@q, :created_at)
   tbody
-    = render partial: 'web/repositories/checks/check', collection: @repository.checks
+    = render partial: 'web/repositories/checks/check', collection: @checks
+
+= paginate @checks

@@ -7,16 +7,18 @@ hr
 table.table.table-hover
   thead
     tr
-      th scope='col' = t('.id')
-      th scope='col' = t('.github_id')
-      th scope='col' = t('.name')
+      th scope='col' = sort_link(@q, :id)
+      th scope='col' = sort_link(@q, :github_id)
+      th scope='col' = sort_link(@q, :name)
       th scope='col' = t('.last_check')
-      th scope='col' = t('.language')
+      th scope='col' = sort_link(@q, :language)
   tbody
     - @repositories.each do |repo|
       tr
         th scope='row' = link_to repo.id, repository_path(repo), class: 'link-info text-decoration-none'
         td = link_to repo.github_id, repo.link, target: '_blank', class: 'link-info text-decoration-none'
         td = repo.full_name
-        td = repo.checks.empty? ? '-' : repo.checks.last.passed
+        td = repo.checks.empty? ? '-' : repo.last_check
         td = repo.language
+
+= paginate @repositories
