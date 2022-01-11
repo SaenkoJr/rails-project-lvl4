@@ -9,6 +9,11 @@ class RepositoryService
     client = github_client.new(repo.user.token)
     data = client.repo(repo.github_id)
 
+    pp '------------------------------------------'
+    pp data
+    pp repo
+    pp '------------------------------------------'
+
     repo.name = data[:name]
     repo.full_name = data[:full_name]
     repo.link = data[:html_url]
