@@ -9,6 +9,7 @@ class RepositoryService
     pp "PERSISTED?: #{repo.persisted?}"
     pp repo.fetch
     pp repo
+    pp repo.save!
     pp '------------------------------------------'
 
     # repo.fetch!
