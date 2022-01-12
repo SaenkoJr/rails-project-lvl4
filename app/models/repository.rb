@@ -28,8 +28,6 @@ class Repository < ApplicationRecord
     event :fail do
       transitions from: :fetching, to: :failed
     end
-
-
   end
 
   def commits

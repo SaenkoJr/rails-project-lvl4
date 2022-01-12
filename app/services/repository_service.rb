@@ -4,15 +4,7 @@ class RepositoryService
   include Import[:github_client]
 
   def update_info(repo)
-    pp '------------------------------------------'
-    pp "MAY FETCH?: #{repo.may_fetch?}"
-    pp "PERSISTED?: #{repo.persisted?}"
-    pp repo.fetch
-    pp repo
-    pp repo.save!
-    pp '------------------------------------------'
-
-    # repo.fetch!
+    repo.fetch!
 
     client = github_client.new(repo.user.token)
     data = client.repo(repo.github_id)
