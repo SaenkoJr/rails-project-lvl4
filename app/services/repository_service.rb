@@ -7,6 +7,7 @@ class RepositoryService
     pp '------------------------------------------'
     pp "MAY FETCH?: #{repo.may_fetch?}"
     pp "PERSISTED?: #{repo.persisted?}"
+    pp repo.fetch
     pp repo
     pp '------------------------------------------'
 
