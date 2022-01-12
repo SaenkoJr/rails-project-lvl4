@@ -26,8 +26,10 @@ class Repository < ApplicationRecord
     end
 
     event :fail do
-      transitions from: %i[created fetching], to: :failed
+      transitions from: :fetching, to: :failed
     end
+
+
   end
 
   def commits
