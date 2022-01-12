@@ -3,7 +3,7 @@
 class GithubHookJob < ApplicationJob
   queue_as :github
 
-  def perform(repo)
-    RepositoryService.new.create_hook(repo.id)
+  def perform(id)
+    RepositoryService.new.create_hook(id)
   end
 end

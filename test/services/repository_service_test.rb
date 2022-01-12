@@ -12,7 +12,7 @@ class RepositoryServiceTest < ActiveSupport::TestCase
 
     assert { @repo.full_name.nil? }
 
-    RepositoryService.new.update_info(@repo)
+    RepositoryService.new.update_info(@repo.id)
 
     @repo.reload
 
