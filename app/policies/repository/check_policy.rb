@@ -8,7 +8,8 @@ class Repository::CheckPolicy < ApplicationPolicy
   end
 
   def create?
-    !user.guest? && repository_author?
+    # !user.guest? && repository_author?
+    true
   end
 
   private
