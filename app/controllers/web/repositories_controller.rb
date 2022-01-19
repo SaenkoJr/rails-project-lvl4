@@ -33,7 +33,7 @@ module Web
       authorize Repository
 
       pp '------------------------------------------'
-      pp params
+      pp repository_params
       pp '------------------------------------------'
 
       if repository_params[:github_id].empty?
