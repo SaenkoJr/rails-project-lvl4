@@ -40,7 +40,7 @@ class Repository < ApplicationRecord
     commits.first
   end
 
-  def last_check
+  def check_passed?
     checks.last.passed
   end
 
