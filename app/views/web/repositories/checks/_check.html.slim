@@ -3,7 +3,7 @@ tr
   td = check.aasm_state
   td
     - if check.commit_reference.nil?
-      '-'
+      span -
     - else
       = link_to check.commit_reference[0..6], check.commit_reference_url, target: '_blank', class: 'link-info text-decoration-none'
   td = check.passed
