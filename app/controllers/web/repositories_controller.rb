@@ -32,6 +32,10 @@ module Web
     def create
       authorize Repository
 
+      pp '------------------------------------------'
+      pp repository_params
+      pp '------------------------------------------'
+
       if repository_params[:github_id].empty?
         redirect_to new_repository_path, alert: t('.empty_github_id') and return
       end

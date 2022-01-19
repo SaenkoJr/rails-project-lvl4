@@ -8,7 +8,7 @@ class RepositoryService
     repo.fetch!
 
     client = github_client.new(repo.user.token)
-    data = client.repo(repo.github_id)
+    data = client.repo(repo.full_name)
 
     repo.name = data[:name]
     repo.full_name = data[:full_name]
