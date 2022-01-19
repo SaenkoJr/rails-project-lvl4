@@ -5,7 +5,6 @@ tr
     - if check.commit_reference.nil?
       span -
     - else
-      = link_to check.commit_reference[0..6], check.commit_reference_url, target: '_blank', class: 'link-info text-decoration-none'
+      = link_to check.commit_reference[0..6], check.commit_reference_url, target: '_blank', rel: 'noopener', class: 'link-info text-decoration-none'
   td = check.passed
   td = l(check.created_at)
-

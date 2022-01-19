@@ -1,9 +1,9 @@
 .container
   nav.d-flex.flex-wrap.align-items-center.py-1.mb-4.border-bottom
-    div.navbar.navbar-expand-md.navbar-light.me-auto
+    .navbar.navbar-expand-md.navbar-light.me-auto
       = link_to root_path, class: 'd-flex align-items-center mb-3 mb-md-0 me-2 text-dark text-decoration-none' do
-        span.fs-4= t(:title)
-      div.collapse.navbar-collapse#navbarToggler
+        span.fs-4 = t(:title)
+      .collapse.navbar-collapse#navbarToggler
         ul.nav.nav-pills.flex-grow-1.navbar.me-auto
           li.nav-item
             = link_to t(:home), root_path, class: 'nav-link text-dark'
@@ -17,8 +17,8 @@
             i.bi-person-circle.me-1
           ul.dropdown-menu.dropdown-menu-end aria-labelledby="profile"
             li
-              h5.dropdown-header= current_user.nickname
+              h5.dropdown-header = current_user.nickname
             .dropdown-divider
-            li= link_to t(:sign_out), sign_out_path, method: :delete, class: 'dropdown-item'
+            li = link_to t(:sign_out), sign_out_path, method: :delete, class: 'dropdown-item'
       - else
-        li= link_to t(:github_auth), auth_request_path(:github), method: :post, class: 'nav-link link-dark'
+        li = link_to t(:github_auth), auth_request_path(:github), method: :post, class: 'nav-link link-dark'
