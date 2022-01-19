@@ -16,6 +16,7 @@ module AuthConcern
 
   def current_user
     return Guest.new if session[:user_id].blank?
+    return Guest.new unless User.exists?(session[:user_id])
 
     @current_user ||= User.find(session[:user_id])
   end
