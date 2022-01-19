@@ -7,7 +7,7 @@ class Api::ChecksControllerTest < ActionDispatch::IntegrationTest
     repo = repositories(:one)
 
     payload = {
-      repository: { id: repo[:github_id] }
+      repository: { full_name: repo[:full_name] }
     }
 
     post api_checks_url(params: payload)
@@ -17,7 +17,7 @@ class Api::ChecksControllerTest < ActionDispatch::IntegrationTest
 
   test 'POST #create (repository not found)' do
     payload = {
-      repository: { id: 42 }
+      repository: { full_name: 'foo' }
     }
 
     post api_checks_url(params: payload)

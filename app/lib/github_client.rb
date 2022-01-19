@@ -9,20 +9,20 @@ class GithubClient
     @client.repos
   end
 
-  def repo(repo_id)
-    @client.repo(repo_id)
+  def repo(github_id)
+    @client.repo(github_id)
   end
 
-  def hooks(repo_id)
-    @client.hooks(repo_id)
+  def hooks(github_id)
+    @client.hooks(github_id)
   end
 
-  def commits(repo_id, branch: :master)
-    @client.commits(repo_id, branch: branch)
+  def commits(github_id, branch: :master)
+    @client.commits(github_id, branch: branch)
   end
 
   def create_hook(repository)
-    return if hook_exists?(repository.full_name)
+    return if hook_exists?(repository.github_id.to_i)
 
     @client.create_hook(
       repository.full_name,
@@ -35,8 +35,8 @@ class GithubClient
 
   private
 
-  def hook_exists?(repo_id)
-    hooks(repo_id).one? do |hook|
+  def hook_exists?(github_id)
+    hooks(github_id).one? do |hook|
       hook[:config][:url] == Rails.application.routes.url_helpers.api_checks_url
     end
   end

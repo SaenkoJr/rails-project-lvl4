@@ -33,7 +33,7 @@ class Repository < ApplicationRecord
   def commits
     client = ApplicationContainer[:github_client].new(user.token)
 
-    client.commits(github_id)
+    client.commits(github_id.to_i)
   end
 
   def last_commit
@@ -47,6 +47,6 @@ class Repository < ApplicationRecord
   def hooks
     client = ApplicationContainer[:github_client].new(user.token)
 
-    client.hooks(github_id)
+    client.hooks(github_id.to_i)
   end
 end
