@@ -19,6 +19,8 @@ table.table.table-hover
         td = link_to repo.github_id, repo.link, target: '_blank', rel: 'noopener', class: 'link-info text-decoration-none'
         td = link_to repo.full_name, repository_path(repo), class: 'link-info text-decoration-none'
         td = repo.checks.empty? ? '-' : repo.check_passed?
-        td = repo.language
+        td
+          span class="badge #{repo.language}"
+            = repo.language
 
 = paginate @repositories
