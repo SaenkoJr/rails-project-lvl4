@@ -3,10 +3,7 @@
 module Api
   class ChecksController < Api::ApplicationController
     def create
-      pp '------------------------------------------'
-      pp params
-      pp '------------------------------------------'
-      repo = Repository.find_by(github_id: params[:repository][:id])
+      repo = Repository.find_by(full_name: params[:repository][:full_name])
       commit_ref = params.dig(:head_commit, :id)
       commit_ref_url = params.dig(:head_commit, :url)
 
