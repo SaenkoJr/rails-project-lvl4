@@ -4,7 +4,7 @@ class Rubocop
   include Import[:bash_runner]
 
   def lint(path)
-    command = "bundle exec rubocop --format json #{path}"
+    command = "bundle exec rubocop -c #{Rails.root.join('.rubocop.yml')} --format json #{path}"
 
     stdout, stderr, exit_status = bash_runner.start(command)
 
