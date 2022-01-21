@@ -1,24 +1,11 @@
 # frozen_string_literal: true
 
-class Rubocop
-  include Import[:bash_runner]
-
-  def lint(path)
-    command = "bundle exec rubocop -c #{Rails.root.join('.rubocop.yml')} --format json #{path}"
-
-    stdout, stderr, exit_status = bash_runner.start(command)
-
-    unless stderr.empty?
-      raise stderr
-    end
-
-    {
-      passed: exit_status.success?,
-      issues: parse(stdout)
-    }
-  end
-
+class Linter::Rubocop < Linter::ApplicationLinter
   private
+
+  def command(path)
+    "bundle exec rubocop -c #{Rails.root.join('.rubocop.yml')} --format json #{path}"
+  end
 
   def parse(output)
     issues = JSON.parse(output, symbolize_names: true)

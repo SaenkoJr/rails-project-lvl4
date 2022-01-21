@@ -4,13 +4,14 @@ class CheckerService
   include Import[:bash_runner]
 
   LINTERS = {
-    javascript: Eslint,
-    ruby: Rubocop
+    javascript: Linter::Eslint,
+    ruby: Linter::Rubocop
   }.freeze
 
   def run(id)
     check = Repository::Check.find(id)
     repository = check.repository
+    commit = repository.last_commit
     check.run!
 
     loader = RepoLoader.new
@@ -21,11 +22,16 @@ class CheckerService
     end
 
     linter = LINTERS[repository.language.to_sym].new
-    result = linter.lint(loader.repo_dest(repository.full_name))
+    dest = loader.repo_dest(repository.full_name)
+    result = linter.lint(dest)
+
+    check.commit_reference = commit[:sha]
+    check.commit_reference_url = commit[:html_url]
 
     if result[:passed]
-      check.update(passed: true)
-      return check.finish!
+      check.passed = true
+      check.finish
+      return check.save!
     end
 
     check.passed = false

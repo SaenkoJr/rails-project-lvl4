@@ -27,7 +27,7 @@ class GithubClient
     @client.create_hook(
       repository.full_name,
       'web',
-      { url: Rails.application.routes.url_helpers.api_checks_url, content_type: 'json' }
+      { url: api_check_url, content_type: 'json' }
     )
 
     repository.save!
@@ -35,9 +35,13 @@ class GithubClient
 
   private
 
+  def api_check_url
+    Rails.application.routes.url_helpers.api_checks_url
+  end
+
   def hook_exists?(github_id)
     hooks(github_id).one? do |hook|
-      hook[:config][:url] == Rails.application.routes.url_helpers.api_checks_url
+      hook[:config][:url] == api_check_url
     end
   end
 end

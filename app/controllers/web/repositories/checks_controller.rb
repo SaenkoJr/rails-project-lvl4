@@ -21,10 +21,6 @@ module Web
 
         authorize @check
 
-        commit = @repo.last_commit
-        @check.commit_reference = commit[:sha]
-        @check.commit_reference_url = commit[:html_url]
-
         if @check.save
           CheckRepositoryJob.perform_later(@check)
           flash[:notice] = t('.success')
