@@ -14,7 +14,7 @@ class RepositoryService
     repo.full_name = data[:full_name]
     repo.link = data[:html_url]
     repo.language = data[:language].downcase
-    repo.done
+    repo.mark_as_fetched
     repo.save!
   rescue StandardError => e
     repo.fail!
